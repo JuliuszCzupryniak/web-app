@@ -14,18 +14,24 @@ public class Customer {
     @Id
     @Column(name = "id_customer")
     private int id_customer;
+    @Column(name = "mail_customer")
+    private String mail_customer;
     @Column(name = "name_customer")
     private String name_customer;
     @Column(name = "surname_customer")
     private String surname_customer;
+    @Column(name = "password")
+    private String password;
 
     public Customer() {
     }
 
-    public Customer(int id_customer, String name_customer, String surname_customer) {
+    public Customer(int id_customer, String mail_customer, String name_customer, String surname_customer, String password) {
         this.id_customer = id_customer;
+        this.mail_customer = mail_customer;
         this.name_customer = name_customer;
         this.surname_customer = surname_customer;
+        this.password = password;
     }
 
     public int getId_customer() {
@@ -50,5 +56,21 @@ public class Customer {
 
     public void setSurname_customer(String surname_customer) {
         this.surname_customer = surname_customer;
+    }
+
+    public String getMail_customer() {
+        return mail_customer;
+    }
+
+    public void setMail_customer(String mail_customer) {
+        this.mail_customer = mail_customer;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
