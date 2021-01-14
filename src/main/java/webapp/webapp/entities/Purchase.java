@@ -24,17 +24,20 @@ public class Purchase {
     private String delivery_address;
     @Column(name = "sum_purchase")
     private float sum_purchase;
+    @Column(name = "bought")
+    private boolean bought;
 
     public Purchase() {
     }
 
-    public Purchase(int id_purchase, int id_customer, String delivery_city, int delivery_zipcode, String delivery_address, float sum_purchase) {
+    public Purchase(int id_purchase, int id_customer, String delivery_city, int delivery_zipcode, String delivery_address, float sum_purchase, boolean bought) {
         this.id_purchase = id_purchase;
         this.id_customer = id_customer;
         this.delivery_city = delivery_city;
         this.delivery_zipcode = delivery_zipcode;
         this.delivery_address = delivery_address;
         this.sum_purchase = sum_purchase;
+        this.bought = bought;
     }
 
     public int getId_purchase() {
@@ -51,6 +54,14 @@ public class Purchase {
 
     public void setId_customer(int id_customer) {
         this.id_customer = id_customer;
+    }
+
+    public boolean isBought() {
+        return bought;
+    }
+
+    public void setBought(boolean bought) {
+        this.bought = bought;
     }
 
     public String getDelivery_city() {

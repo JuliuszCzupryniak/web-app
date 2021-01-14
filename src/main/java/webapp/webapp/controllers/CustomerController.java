@@ -10,7 +10,7 @@ import webapp.webapp.repositories.CustomerRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/entities")
+@RequestMapping("/api")
 public class CustomerController {
 
     @Autowired
