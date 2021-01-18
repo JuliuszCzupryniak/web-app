@@ -3,7 +3,6 @@ package webapp.webapp.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webapp.webapp.dtos.CategoryRequest;
-import webapp.webapp.dtos.CategoryResponse;
 import webapp.webapp.dtos.ProductResponse;
 import webapp.webapp.repositories.ProductRepository;
 

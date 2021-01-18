@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import webapp.webapp.dtos.CategoryRequest;
@@ -24,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("/products_by_category")
-    public ResponseEntity<List<ProductResponse>> getProducts(CategoryRequest categoryRequest){
+    public ResponseEntity<List<ProductResponse>> getProducts(@RequestBody CategoryRequest categoryRequest){
         return new ResponseEntity<List<ProductResponse>>(productService.getAllFromCategory(categoryRequest),HttpStatus.OK);
     }
 

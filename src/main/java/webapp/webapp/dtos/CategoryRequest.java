@@ -6,5 +6,5 @@ import lombok.Data;
 public class CategoryRequest {
     private int id_category;
     private String name_category;
-    private byte[] image_catgeory;
+    private byte[] image_category;
 }

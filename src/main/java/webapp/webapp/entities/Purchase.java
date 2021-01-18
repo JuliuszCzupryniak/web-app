@@ -2,16 +2,14 @@ package webapp.webapp.entities;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "purchase")
 public class Purchase {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_purchase")
     private int id_purchase;
     @Column(name = "id_customer")
@@ -19,7 +17,7 @@ public class Purchase {
     @Column(name = "delivery_city")
     private String delivery_city;
     @Column(name = "delivery_zipcode")
-    private int delivery_zipcode;
+    private String delivery_zipcode;
     @Column(name = "delivery_address")
     private String delivery_address;
     @Column(name = "sum_purchase")
@@ -30,7 +28,7 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(int id_purchase, int id_customer, String delivery_city, int delivery_zipcode, String delivery_address, float sum_purchase, boolean bought) {
+    public Purchase(int id_purchase, int id_customer, String delivery_city, String delivery_zipcode, String delivery_address, float sum_purchase, boolean bought) {
         this.id_purchase = id_purchase;
         this.id_customer = id_customer;
         this.delivery_city = delivery_city;
@@ -72,11 +70,11 @@ public class Purchase {
         this.delivery_city = delivery_city;
     }
 
-    public int getDelivery_zipcode() {
+    public String getDelivery_zipcode() {
         return delivery_zipcode;
     }
 
-    public void setDelivery_zipcode(int delivery_zipcode) {
+    public void setDelivery_zipcode(String delivery_zipcode) {
         this.delivery_zipcode = delivery_zipcode;
     }
 

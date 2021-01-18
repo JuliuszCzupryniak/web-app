@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import webapp.webapp.dtos.PurchaseRequest;
 import webapp.webapp.dtos.PurchaseRowRequest;
 import webapp.webapp.dtos.PurchaseRowResponse;
+import webapp.webapp.entities.Purchase;
 import webapp.webapp.entities.PurchaseRow;
 import webapp.webapp.entities.PurchaseRowPrimaryKey;
 import webapp.webapp.repositories.PurchaseRowRepository;
@@ -52,8 +53,8 @@ public class PurchaseRowServiceImpl implements PurchaseRowService{
         int id_purchase = purchaseRowRequest.getId_purchase();
         int id_product = purchaseRowRequest.getId_product();
         PurchaseRowPrimaryKey purchaseRowPrimaryKey = new PurchaseRowPrimaryKey(id_product,id_purchase);
-        Optional<PurchaseRow> purchaseRow = purchaseRowRepository.findById(purchaseRowPrimaryKey);
-        purchaseRow.get().setQuantity(purchaseRowRequest.getQuantity());
-        purchaseRowRepository.save(purchaseRow.get());
+        PurchaseRow purchaseRow = purchaseRowRepository.getOne(purchaseRowPrimaryKey);
+        purchaseRow.setQuantity(purchaseRowRequest.getQuantity());
+        purchaseRowRepository.save(purchaseRow);
     }
 }

@@ -9,6 +9,7 @@ import webapp.webapp.dtos.PurchaseResponse;
 import webapp.webapp.entities.Purchase;
 import webapp.webapp.repositories.PurchaseRepository;
 
+import javax.persistence.PrePersist;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,10 +52,11 @@ public class PurchaseServiceImpl implements PurchaseService{
     @Override
     public void updatePurchase(PurchaseRequest purchaseRequest) {
         int id_purchase = purchaseRequest.getId_purchase();
-        Optional<Purchase> purchase = purchaseRepository.findById(id_purchase);
-        purchase.get().setDelivery_address(purchaseRequest.getDelivery_address());
-        purchase.get().setDelivery_zipcode(purchaseRequest.getDelivery_zipcode());
-        purchase.get().setDelivery_city(purchaseRequest.getDelivery_city());
-        purchase.get().setBought(purchaseRequest.isBought());
+        Purchase purchase = purchaseRepository.getOne(id_purchase);
+        purchase.setDelivery_address(purchaseRequest.getDelivery_address());
+        purchase.setDelivery_zipcode(purchaseRequest.getDelivery_zipcode());
+        purchase.setDelivery_city(purchaseRequest.getDelivery_city());
+        purchase.setBought(purchaseRequest.isBought());
+        purchaseRepository.save(purchase);
     }
 }

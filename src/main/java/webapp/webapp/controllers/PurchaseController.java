@@ -3,10 +3,9 @@ package webapp.webapp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import webapp.webapp.dtos.CustomerRequest;
+import webapp.webapp.dtos.PurchaseRequest;
 import webapp.webapp.dtos.PurchaseResponse;
 import webapp.webapp.services.PurchaseService;
 
@@ -24,7 +23,26 @@ public class PurchaseController {
     }
 
     @GetMapping("/purchases")
-    public ResponseEntity<List<PurchaseResponse>> getCustomerPurchases(CustomerRequest customerRequest){
+    public ResponseEntity<List<PurchaseResponse>> getCustomerPurchases(@RequestBody CustomerRequest customerRequest){
         return new ResponseEntity<>(purchaseService.getCustomersPurchase(customerRequest), HttpStatus.OK);
     }
+
+    @PostMapping("/purchases")
+    public ResponseEntity addPurchase(@RequestBody PurchaseRequest purchaseRequest){
+        purchaseService.addPurchase(purchaseRequest);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/purchases")
+    public ResponseEntity updatePurchase(@RequestBody PurchaseRequest purchaseRequest){
+        purchaseService.updatePurchase(purchaseRequest);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/purchases")
+    public ResponseEntity deletePurchase(@RequestBody PurchaseRequest purchaseRequest){
+        purchaseService.deletePurchase(purchaseRequest);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 }

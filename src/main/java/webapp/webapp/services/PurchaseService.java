@@ -3,7 +3,6 @@ package webapp.webapp.services;
 import webapp.webapp.dtos.CustomerRequest;
 import webapp.webapp.dtos.PurchaseRequest;
 import webapp.webapp.dtos.PurchaseResponse;
-import webapp.webapp.entities.Purchase;
 
 import java.util.List;
 

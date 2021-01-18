@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class CategoryResponse {
     private int id_category;
     private String name_category;
-    private byte[] image_catgeory;
+    private byte[] image_category;
 }
