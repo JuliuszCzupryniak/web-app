@@ -5,23 +5,24 @@ import org.springframework.stereotype.Service;
 import webapp.webapp.dtos.PurchaseRequest;
 import webapp.webapp.dtos.PurchaseRowRequest;
 import webapp.webapp.dtos.PurchaseRowResponse;
-import webapp.webapp.entities.Purchase;
 import webapp.webapp.entities.PurchaseRow;
 import webapp.webapp.entities.PurchaseRowPrimaryKey;
+import webapp.webapp.repositories.ProductRepository;
 import webapp.webapp.repositories.PurchaseRowRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
 public class PurchaseRowServiceImpl implements PurchaseRowService{
     private final PurchaseRowRepository purchaseRowRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public PurchaseRowServiceImpl(PurchaseRowRepository purchaseRowRepository) {
+    public PurchaseRowServiceImpl(PurchaseRowRepository purchaseRowRepository, ProductRepository productRepository) {
         this.purchaseRowRepository = purchaseRowRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -38,6 +39,7 @@ public class PurchaseRowServiceImpl implements PurchaseRowService{
         purchaseRow.setId_product(purchaseRowRequest.getId_product());
         purchaseRow.setId_purchase(purchaseRowRequest.getId_purchase());
         purchaseRow.setQuantity(purchaseRowRequest.getQuantity());
+        purchaseRow.setSum_row(productRepository.getOne(purchaseRowRequest.getId_product()).getPrice_product() * purchaseRowRequest.getQuantity());
         purchaseRowRepository.save(purchaseRow);
     }
 
@@ -55,6 +57,7 @@ public class PurchaseRowServiceImpl implements PurchaseRowService{
         PurchaseRowPrimaryKey purchaseRowPrimaryKey = new PurchaseRowPrimaryKey(id_product,id_purchase);
         PurchaseRow purchaseRow = purchaseRowRepository.getOne(purchaseRowPrimaryKey);
         purchaseRow.setQuantity(purchaseRowRequest.getQuantity());
+        purchaseRow.setSum_row(productRepository.getOne(purchaseRowRequest.getId_product()).getPrice_product() * purchaseRowRequest.getQuantity());
         purchaseRowRepository.save(purchaseRow);
     }
 }
